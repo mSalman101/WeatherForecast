@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+        <div class="search">
+            <input type="text" placeholder="enter city name" spellcheck="false">
+            <button><img src="images/search.png"></button>
+        </div>
+        <div class="weather">
+            <img src="images/rain.png" class="weather-icon">
+            <h1 class="temp">X C</h1>
+            <h2 class="city">City</h2>
+            <div class="col">
+                <img src="images/humidity.png">
+                <div>
+                    <p class="humidity">X%</p>
+                    <p>Humidity</p>
+                </div>
+            </div>
+            <div class="col">
+                <img src="images/wind.png">
+                <div>
+                    <p class="wind">Y%</p>
+                    <p>Wind Speed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Rain HTML-->
+    <body>
+        <div class="raindrop" style="left: 10%;"></div>
+        <div class="raindrop" style="left: 20%;"></div>
+        <div class="raindrop" style="left: 30%;"></div>
+        <div class="raindrop" style="left: 40%;"></div>
+        <div class="raindrop" style="left: 50%;"></div>
+        <div class="raindrop" style="left: 60%;"></div>
+        <div class="raindrop" style="left: 70%;"></div>
+        <div class="raindrop" style="left: 80%;"></div>
+        <div class="raindrop" style="left: 90%;"></div>
+      </body>
+      
+    <!--Rain HTML-->
+    <!--SunLight HTML-->
+    <body>
+        <div class="sunlight"></div>
+      </body>
+      
+    <!--SunLight HTML-->
+
+      <!--Snow HTML-->
+      <body>
+        <div class="snowflake" style="left: 10%;"></div>
+        <div class="snowflake" style="left: 20%;"></div>
+        <div class="snowflake" style="left: 30%;"></div>
+        <div class="snowflake" style="left: 40%;"></div>
+        <div class="snowflake" style="left: 50%;"></div>
+        <div class="snowflake" style="left: 60%;"></div>
+        <div class="snowflake" style="left: 70%;"></div>
+        <div class="snowflake" style="left: 80%;"></div>
+        <div class="snowflake" style="left: 90%;"></div>
+      </body>
+      
+      <!--Snow HTML-->
+
+    <script>
+        const apiKey = "67a1540d87ce02d465163a84cb907bdc";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        const searchBox=document.querySelector(".search input");
+        const searchBtn=document.querySelector(".search button");
+
+        async function checkWeather(city) {
+            const response =await fetch(apiUrl +city+ `&appid=${apiKey}`);
+            var data=await response.json();
+
+            console.log(data);
+
+            document.querySelector(".city").innerHTML=data.name;
+            document.querySelector(".temp").innerHTML=Math.round(data.main.temp) +"°C" ;
+            document.querySelector(".humidity").innerHTML=data.main.humidity + "%";
+            document.querySelector(".wind").innerHTML=data.wind.speed + "Km/h";
+
+        }
+        searchBtn.addEventListener("click" ,()=>{
+            checkWeather(searchBox.value);
+        })
+        searchBox.addEventListener("keypress" ,(event)=>{
+            if(event.key==="Enter"){
+                checkWeather(searchBox.value);
+            }
+            
+        });
+
+       // checkWeather();
+    </script>
+</body>
+</html>
